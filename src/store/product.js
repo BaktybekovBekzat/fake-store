@@ -1,19 +1,20 @@
 import { makeAutoObservable } from "mobx";
 
 class Product {
-    products = [];
-    totalItems = 0;
+    data = {
+        title: "",
+    };
     isLoading = false;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    async getAll(page = 1, limit = 30) {
+    async getOne(id) {
         this.isLoading = true;
         try {
-            const res = await fetch(`https://fakestoreapi.com/products?${page}&limit=${limit}`);
-            this.products = await res.json();
+            const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+            this.data = await res.json();
         } catch (e) {
             console.log(e);
         } finally {

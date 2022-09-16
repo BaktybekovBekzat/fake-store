@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeScreen, ProductScreen } from "./screens";
+import { HomeScreen, ProductScreen, CartScreen } from "./screens";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
@@ -16,7 +16,7 @@ const Navigation = () => {
                         case "Home":
                             iconName = "home";
                             break;
-                        case "Product":
+                        case "Cart":
                             iconName = "cart";
                             break;
                         default:
@@ -40,6 +40,14 @@ const Navigation = () => {
             <Tab.Screen
                 name="Product"
                 component={ProductScreen}
+                options={{
+                    headerTitle: "Страница товара",
+                    tabBarButton: (props) => null,
+                }}
+            />
+            <Tab.Screen
+                name="Cart"
+                component={CartScreen}
                 options={{ headerTitle: "Корзина" }}
             />
         </Tab.Navigator>

@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
 const StyledProductItem = styled.View`
@@ -41,6 +42,8 @@ const StyledHeartIcon = styled.Image`
 `;
 
 export default function ProductItem({ data }) {
+    const navigation = useNavigation();
+
     return (
         <StyledProductItem
             style={{
@@ -54,7 +57,11 @@ export default function ProductItem({ data }) {
             <View
                 style={{ paddingBottom: 10, paddingLeft: 12, paddingRight: 12 }}
             >
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() =>
+                        navigation.navigate("Product", { _id: data.id })
+                    }
+                >
                     <StyledTitle>{data.title}</StyledTitle>
                 </TouchableOpacity>
                 <StyledPrice>${data.price}</StyledPrice>

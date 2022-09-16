@@ -3,30 +3,30 @@ import React from "react";
 import { useEffect } from "react";
 import { SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
 import { ProductItem } from "../../components";
-import product from "../../store/product";
+import products from "../../store/products";
 import styled from "styled-components/native";
 
 const StyledProductsList = styled.View`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
     gap: 10px;
     padding: 10px 15px;
 `;
 
 const HomeScreen = observer(({ navigation }) => {
     useEffect(() => {
-        product.getAll();
+        products.getAll();
     }, []);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
-                {product.isLoading ? (
+                {products.isLoading ? (
                     <ActivityIndicator />
                 ) : (
                     <StyledProductsList>
-                        {product.products.map((product) => {
+                        {products.products.map((product) => {
                             return (
                                 <ProductItem data={product} key={product.id} />
                             );
