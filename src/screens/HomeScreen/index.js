@@ -1,16 +1,18 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { useEffect } from "react";
-import {
-    SafeAreaView,
-    Text,
-    FlatList,
-    ActivityIndicator,
-    View,
-    Image,
-    ScrollView,
-} from "react-native";
+import { SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
+import { ProductItem } from "../../components";
 import product from "../../store/product";
+import styled from "styled-components/native";
+
+const StyledProductsList = styled.View`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 15px;
+`;
 
 const HomeScreen = observer(({ navigation }) => {
     useEffect(() => {
@@ -19,20 +21,19 @@ const HomeScreen = observer(({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            {product.isLoading ? (
-                <ActivityIndicator />
-            ) : (
-                <FlatList
-                    scrollEnabled={true}
-                    data={product.products}
-                    renderItem={({ item }) => (
-                        <View key={item.id}>
-                            <Image source={{ uri: item.image, width: 200, height: 200 }} />
-                            <Text>{item.title}</Text>
-                        </View>
-                    )}
-                />
-            )}
+            <ScrollView>
+                {product.isLoading ? (
+                    <ActivityIndicator />
+                ) : (
+                    <StyledProductsList>
+                        {product.products.map((product) => {
+                            return (
+                                <ProductItem data={product} key={product.id} />
+                            );
+                        })}
+                    </StyledProductsList>
+                )}
+            </ScrollView>
         </SafeAreaView>
     );
 });

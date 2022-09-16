@@ -23,11 +23,15 @@ const Navigation = () => {
                             break;
                     }
 
-                    return <Ionicons name={iconName} size={size} color={color} />;
+                    return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                    );
                 },
                 tabBarActiveTintColor: "#f58735",
-                tabBarInactiveTintColor: "#ccc",
-            })}>
+                tabBarInactiveTintColor: "#000",
+            })}
+            sceneContainerStyle={{ backgroundColor: "#fff" }}
+        >
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
