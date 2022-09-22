@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeScreen, ProductScreen, CartScreen } from "./screens";
+import { HomeScreen, ProductScreen, CartScreen, LoginScreen } from "./screens";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        (async () => {
+            const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
+
+            if (isLoggedIn) {
+                navigation.navigate("Home");
+            } else {
+                navigation.navigate("Login");
+            }
+        })();
+    }, []);
+
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -23,15 +39,13 @@ const Navigation = () => {
                             break;
                     }
 
-                    return (
-                        <Ionicons name={iconName} size={size} color={color} />
-                    );
+                    return <Ionicons name={iconName} size={size} color={color} />;
                 },
                 tabBarActiveTintColor: "#f58735",
                 tabBarInactiveTintColor: "#000",
             })}
             sceneContainerStyle={{ backgroundColor: "#fff" }}
-        >
+            initialRouteName="Login">
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
@@ -45,10 +59,14 @@ const Navigation = () => {
                     tabBarButton: (props) => null,
                 }}
             />
+            <Tab.Screen name="Cart" component={CartScreen} options={{ headerTitle: "Корзина" }} />
             <Tab.Screen
-                name="Cart"
-                component={CartScreen}
-                options={{ headerTitle: "Корзина" }}
+                name="Login"
+                component={LoginScreen}
+                options={{
+                    headerTitle: "Войти в аккаунт",
+                    tabBarButton: (props) => null,
+                }}
             />
         </Tab.Navigator>
     );
