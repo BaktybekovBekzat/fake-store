@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { makeAutoObservable } from "mobx";
 
 class User {
@@ -11,13 +12,21 @@ class User {
     async login(data) {
         this.isLoading = true;
         try {
-            await new Promise((res, rej) => {
-                setTimeout(() => {
-                    res();
-                }, [2000]);
+            const res = await fetch("https://dummyjson.com/users/add", {
+                method: "POST",
+                body: JSON.stringify({
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    age: data.age,
+                    password: data.password,
+                }),
+                headers: {
+                    "Content-type": "application/json",
+                },
             });
+            this.isLoggedIn = true;
 
-            return (this.isLoggedIn = true);
+            return (await res.json()) ? true : false;
         } catch (e) {
             this.isLoggedIn = false;
         } finally {

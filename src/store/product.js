@@ -13,7 +13,7 @@ class Product {
     async getOne(id) {
         this.isLoading = true;
         try {
-            const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+            const res = await fetch(`https://dummyjson.com/products/${id}`);
             this.data = await res.json();
         } catch (e) {
             console.log(e);

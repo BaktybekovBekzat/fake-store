@@ -14,19 +14,23 @@ const StyledTextInput = styled.TextInput`
 
 const LoginScreen = observer(({ navigation }) => {
     const [form, setForm] = useState({
-        username: "",
+        firstName: "",
+        lastName: "",
+        age: "",
         password: "",
     });
 
     const login = async () => {
-        if (!form.password || !form.username)
+        if (!form.password || !form.firstName || !form.lastName || !form.age)
             return Alert.alert("Заполните все поля", "Введите свой username и пароль");
 
-        const res = await user.login(form);
+        const isLoggedIn = await user.login(form);
 
-        if (res) {
-            AsyncStorage.setItem("isLoggedIn", res);
+        if (isLoggedIn) {
+            AsyncStorage.setItem("isLoggedIn", isLoggedIn);
             navigation.navigate("Home");
+        } else {
+            AsyncStorage.setItem("isLoggedIn", isLoggedIn);
         }
     };
 
@@ -34,10 +38,22 @@ const LoginScreen = observer(({ navigation }) => {
         <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <View>
                 <StyledTextInput
-                    placeholder="Username"
-                    textContentType="username"
-                    value={form.username}
-                    onChangeText={(value) => setForm({ ...form, username: value })}
+                    placeholder="Firstname"
+                    textContentType="firstName"
+                    value={form.firstName}
+                    onChangeText={(value) => setForm({ ...form, firstName: value })}
+                />
+                <StyledTextInput
+                    placeholder="LastName"
+                    textContentType="lastName"
+                    value={form.lastName}
+                    onChangeText={(value) => setForm({ ...form, lastName: value })}
+                />
+                <StyledTextInput
+                    placeholder="Age"
+                    textContentType="number"
+                    value={form.age}
+                    onChangeText={(value) => setForm({ ...form, age: value })}
                 />
                 <StyledTextInput
                     placeholder="Password"

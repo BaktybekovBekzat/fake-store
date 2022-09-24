@@ -51,24 +51,15 @@ export default function ProductItem({ data }) {
                 shadowOffest: { width: 0, height: 0 },
                 shadowOpacity: 0.1,
                 shadowRadius: 12,
-            }}
-        >
-            <StyledImage source={{ uri: data.image }} resizeMode="contain" />
-            <View
-                style={{ paddingBottom: 10, paddingLeft: 12, paddingRight: 12 }}
-            >
-                <TouchableOpacity
-                    onPress={() =>
-                        navigation.navigate("Product", { _id: data.id })
-                    }
-                >
+            }}>
+            <StyledImage source={{ uri: data.thumbnail }} resizeMode="contain" />
+            <View style={{ paddingBottom: 10, paddingLeft: 12, paddingRight: 12 }}>
+                <TouchableOpacity onPress={() => navigation.navigate("Product", { _id: data.id })}>
                     <StyledTitle>{data.title}</StyledTitle>
                 </TouchableOpacity>
                 <StyledPrice>${data.price}</StyledPrice>
             </View>
-            <StyledHeartIcon
-                source={{ uri: require("../../assets/images/heart.png") }}
-            />
+            <StyledHeartIcon source={{ uri: require("../../assets/images/heart.png") }} />
         </StyledProductItem>
     );
 }

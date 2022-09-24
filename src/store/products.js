@@ -9,13 +9,12 @@ class Products {
         makeAutoObservable(this);
     }
 
-    async getAll(page = 1, limit = 30) {
+    async getAll() {
         this.isLoading = true;
         try {
-            const res = await fetch(
-                `https://fakestoreapi.com/products?${page}&limit=${limit}`
-            );
-            this.products = await res.json();
+            const res = await fetch(`https://dummyjson.com/products`);
+            const json = await res.json();
+            this.products = json.products;
         } catch (e) {
             console.log(e);
         } finally {

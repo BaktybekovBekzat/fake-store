@@ -27,9 +27,7 @@ const HomeScreen = observer(({ navigation }) => {
                 ) : (
                     <StyledProductsList>
                         {products.products.map((product) => {
-                            return (
-                                <ProductItem data={product} key={product.id} />
-                            );
+                            return <ProductItem data={product} key={product.id} />;
                         })}
                     </StyledProductsList>
                 )}

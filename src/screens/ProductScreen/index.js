@@ -1,16 +1,9 @@
 import { observer } from "mobx-react";
 import React, { useMemo } from "react";
-import {
-    SafeAreaView,
-    Text,
-    ActivityIndicator,
-    View,
-    Image,
-    Button,
-    Alert,
-} from "react-native";
+import { SafeAreaView, ActivityIndicator, View, Image, Button, Alert } from "react-native";
 import product from "../../store/product";
 import styled from "styled-components/native";
+import cart from "../../store/cart";
 
 const StyledTitle = styled.Text`
     font-size: 20px;
@@ -54,8 +47,12 @@ const ProductScreen = observer(({ navigation, route }) => {
         }
     }, [_id]);
 
-    const addToCart = () => {
-        Alert.alert("Товар добавен в корзину");
+    const addToCart = (product) => {
+        if (!product) return;
+
+        cart.addToCart(product).then(() => {
+            console.log("Added to cart");
+        });
     };
 
     return (
@@ -65,7 +62,7 @@ const ProductScreen = observer(({ navigation, route }) => {
             ) : (
                 <View>
                     <Image
-                        source={{ uri: product.data.image, height: 240 }}
+                        source={{ uri: product.data.thumbnail, height: 240 }}
                         resizeMode="contain"
                         style={{
                             borderBottomColor: "#ccc",
@@ -79,7 +76,7 @@ const ProductScreen = observer(({ navigation, route }) => {
                         <Button
                             title="Добавить в корзину"
                             color="#000"
-                            onPress={addToCart}
+                            onPress={() => addToCart(product.data)}
                         />
                         <StyledPrice>${product.data.price}</StyledPrice>
                     </View>
