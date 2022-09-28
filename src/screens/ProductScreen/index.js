@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
     SafeAreaView,
     ActivityIndicator,
@@ -47,6 +47,7 @@ const StyledCategory = styled.Text`
 
 const ProductScreen = observer(({ navigation, route }) => {
     const { _id } = route.params;
+    const [isInCart, setIsInCart] = useState(false);
 
     useEffect(() => {
         if (_id) {
@@ -54,11 +55,23 @@ const ProductScreen = observer(({ navigation, route }) => {
         }
     }, [_id]);
 
+    useMemo(() => {
+        setIsInCart(cart.data.some((item) => item.id === product.data.id));
+    }, [cart.data]);
+
     const addToCart = (product) => {
         if (!product) return;
 
         cart.addToCart(product).then(() => {
-            console.log("Added to cart");
+            Alert.alert("Успешно", "Товар добавлен в корзину");
+        });
+    };
+
+    const removeFromCart = (id) => {
+        if (!id) return;
+
+        cart.removeFromCart(id).then(() => {
+            Alert.alert("Успешно", "Товар удален из корзины");
         });
     };
 
@@ -81,9 +94,15 @@ const ProductScreen = observer(({ navigation, route }) => {
                         <StyledDesc>{product.data.description}</StyledDesc>
                         <StyledCategory>{product.data.category}</StyledCategory>
                         <Button
-                            title="Добавить в корзину"
-                            color="#000"
-                            onPress={() => addToCart(product.data)}
+                            title={
+                                !isInCart ? "Добавить в корзину" : "В корзине"
+                            }
+                            color={!isInCart ? "#000" : "#ccc"}
+                            onPress={() =>
+                                !isInCart
+                                    ? addToCart(product.data)
+                                    : removeFromCart(product.data.id)
+                            }
                         />
                         <StyledPrice>${product.data.price}</StyledPrice>
                     </View>

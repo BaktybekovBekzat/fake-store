@@ -41,7 +41,9 @@ class Cart {
         }
     }
 
-    async removeFromCart(id) {}
+    async removeFromCart(id) {
+        this.data = [...this.data.filter((product) => product.id !== id)];
+    }
 }
 
 export default new Cart();
