@@ -9,10 +9,12 @@ class Products {
         makeAutoObservable(this);
     }
 
-    async getAll() {
+    async getAll(page = 1) {
         this.isLoading = true;
         try {
-            const res = await fetch(`https://dummyjson.com/products`);
+            const res = await fetch(
+                `https://dummyjson.com/products?skip=${(page - 1) * 30}`
+            );
             const json = await res.json();
             this.products = json.products;
         } catch (e) {
