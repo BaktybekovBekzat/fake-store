@@ -9,7 +9,7 @@ const PaginationBtn = styled.Text`
     color: #fff;
     background-color: #000;
     text-align: center;
-    width: 100;
+    width: 100px;
 `;
 
 const Pagination = ({ setCurrentPage, productsCount }) => {

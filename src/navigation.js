@@ -18,7 +18,9 @@ const Navigation = () => {
 
     useEffect(() => {
         (async () => {
-            const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
+            const isLoggedIn = JSON.parse(
+                await AsyncStorage.getItem("isLoggedIn")
+            );
 
             if (isLoggedIn) {
                 navigation.navigate("Home");

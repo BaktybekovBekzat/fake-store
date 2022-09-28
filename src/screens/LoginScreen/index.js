@@ -27,10 +27,10 @@ const LoginScreen = observer(({ navigation }) => {
         const isLoggedIn = await user.login(form);
 
         if (isLoggedIn) {
-            AsyncStorage.setItem("isLoggedIn", isLoggedIn);
+            AsyncStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
             navigation.navigate("Home");
         } else {
-            AsyncStorage.setItem("isLoggedIn", isLoggedIn);
+            AsyncStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
         }
     };
 

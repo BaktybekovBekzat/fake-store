@@ -56,8 +56,8 @@ const ProductScreen = observer(({ navigation, route }) => {
     }, [_id]);
 
     useMemo(() => {
-        setIsInCart(cart.data.some((item) => item.id === product.data.id));
-    }, [cart.data]);
+        setIsInCart(cart.data.some((item) => item.id === _id));
+    }, [cart.data, _id]);
 
     const addToCart = (product) => {
         if (!product) return;
