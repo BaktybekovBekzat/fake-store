@@ -1,6 +1,13 @@
 import { observer } from "mobx-react";
-import React, { useMemo } from "react";
-import { SafeAreaView, ActivityIndicator, View, Image, Button, Alert } from "react-native";
+import React, { useEffect } from "react";
+import {
+    SafeAreaView,
+    ActivityIndicator,
+    View,
+    Image,
+    Button,
+    Alert,
+} from "react-native";
 import product from "../../store/product";
 import styled from "styled-components/native";
 import cart from "../../store/cart";
@@ -41,7 +48,7 @@ const StyledCategory = styled.Text`
 const ProductScreen = observer(({ navigation, route }) => {
     const { _id } = route.params;
 
-    useMemo(() => {
+    useEffect(() => {
         if (_id) {
             product.getOne(_id);
         }

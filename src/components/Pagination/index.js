@@ -29,7 +29,7 @@ const Pagination = ({ setCurrentPage, productsCount }) => {
                     setCurrentPage((prev) => (prev !== 1 ? prev - 1 : prev))
                 }
             >
-                <PaginationBtn>Prev</PaginationBtn>
+                <PaginationBtn>Пред</PaginationBtn>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() =>
@@ -38,7 +38,7 @@ const Pagination = ({ setCurrentPage, productsCount }) => {
                     )
                 }
             >
-                <PaginationBtn>Next</PaginationBtn>
+                <PaginationBtn>След</PaginationBtn>
             </TouchableOpacity>
         </View>
     );

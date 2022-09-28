@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeScreen, ProductScreen, CartScreen, LoginScreen } from "./screens";
+import {
+    HomeScreen,
+    ProductScreen,
+    CartScreen,
+    LoginScreen,
+    WishlistScreen,
+} from "./screens";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -35,17 +41,23 @@ const Navigation = () => {
                         case "Cart":
                             iconName = "cart";
                             break;
+                        case "Wishlist":
+                            iconName = "heart";
+                            break;
                         default:
                             break;
                     }
 
-                    return <Ionicons name={iconName} size={size} color={color} />;
+                    return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                    );
                 },
                 tabBarActiveTintColor: "#f58735",
-                tabBarInactiveTintColor: "#000",
+                tabBarInactiveTintColor: "#726d6d",
             })}
             sceneContainerStyle={{ backgroundColor: "#fff" }}
-            initialRouteName="Login">
+            initialRouteName="Login"
+        >
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
@@ -59,7 +71,16 @@ const Navigation = () => {
                     tabBarButton: (props) => null,
                 }}
             />
-            <Tab.Screen name="Cart" component={CartScreen} options={{ headerTitle: "Корзина" }} />
+            <Tab.Screen
+                name="Cart"
+                component={CartScreen}
+                options={{ headerTitle: "Корзина" }}
+            />
+            <Tab.Screen
+                name="Wishlist"
+                component={WishlistScreen}
+                options={{ headerTitle: "Избранное" }}
+            />
             <Tab.Screen
                 name="Login"
                 component={LoginScreen}
