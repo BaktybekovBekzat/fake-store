@@ -6,6 +6,7 @@ import {
     CartScreen,
     LoginScreen,
     WishlistScreen,
+    SearchScreen,
 } from "./screens";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -111,6 +112,14 @@ const Navigation = observer(() => {
                 component={LoginScreen}
                 options={{
                     headerTitle: "Войти в аккаунт",
+                    tabBarButton: (props) => null,
+                }}
+            />
+            <Tab.Screen
+                name="Search"
+                component={SearchScreen}
+                options={{
+                    headerTitle: "Поиск",
                     tabBarButton: (props) => null,
                 }}
             />

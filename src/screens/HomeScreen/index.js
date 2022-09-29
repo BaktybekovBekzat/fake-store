@@ -1,8 +1,8 @@
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { SafeAreaView, FlatList, ScrollView, View } from "react-native";
-import { ProductItem, Pagination, Loading } from "../../components";
+import { SafeAreaView, FlatList } from "react-native";
+import { ProductItem, Pagination, Loading, Search } from "../../components";
 import products from "../../store/products";
 
 const HomeScreen = observer(({ navigation }) => {
@@ -18,6 +18,7 @@ const HomeScreen = observer(({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
+            <Search />
             <FlatList
                 data={products.products.slice()}
                 renderItem={(item) => (
