@@ -1,18 +1,26 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React, { useMemo, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Dimensions, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import wishlist from "../../store/wishlist";
+
+const width = Dimensions.get("window").width - 40;
 
 const StyledProductItem = styled.View`
     display: flex;
     flex-direction: column;
-    max-width: 160px;
     width: 100%;
     height: 240px;
     border-radius: 8px;
     background-color: #fff;
+    shadow-color: #000;
+    shadow-offest: {
+        width: 0;
+        height: 0;
+    }
+    shadow-opacity: 0.1;
+    shadow-radius: 12;
 `;
 
 const StyledTitle = styled.Text`
@@ -56,10 +64,7 @@ const ProductItem = observer(({ data }) => {
     return (
         <StyledProductItem
             style={{
-                shadowColor: "#000",
-                shadowOffest: { width: 0, height: 0 },
-                shadowOpacity: 0.1,
-                shadowRadius: 12,
+                maxWidth: width / 2,
             }}
         >
             <StyledImage
@@ -88,8 +93,8 @@ const ProductItem = observer(({ data }) => {
                 <StyledHeartIcon
                     source={{
                         uri: !isInWishlist
-                            ? require("../../assets/images/heart.png")
-                            : require("../../assets/images/heart-active.png"),
+                            ? "../../assets/images/heart.png"
+                            : "../../assets/images/heart-active.png",
                     }}
                 />
             </TouchableOpacity>

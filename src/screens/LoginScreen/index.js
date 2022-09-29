@@ -10,6 +10,7 @@ const StyledTextInput = styled.TextInput`
     border: 1px solid #000;
     border-radius: 5px;
     margin-bottom: 15px;
+    width: 150px;
 `;
 
 const LoginScreen = observer(({ navigation }) => {
@@ -22,7 +23,10 @@ const LoginScreen = observer(({ navigation }) => {
 
     const login = async () => {
         if (!form.password || !form.firstName || !form.lastName || !form.age)
-            return Alert.alert("Заполните все поля", "Введите свой username и пароль");
+            return Alert.alert(
+                "Заполните все поля",
+                "Введите свой username и пароль"
+            );
 
         const isLoggedIn = await user.login(form);
 
@@ -35,19 +39,25 @@ const LoginScreen = observer(({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <SafeAreaView
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
             <View>
                 <StyledTextInput
                     placeholder="Firstname"
                     textContentType="firstName"
                     value={form.firstName}
-                    onChangeText={(value) => setForm({ ...form, firstName: value })}
+                    onChangeText={(value) =>
+                        setForm({ ...form, firstName: value })
+                    }
                 />
                 <StyledTextInput
                     placeholder="LastName"
                     textContentType="lastName"
                     value={form.lastName}
-                    onChangeText={(value) => setForm({ ...form, lastName: value })}
+                    onChangeText={(value) =>
+                        setForm({ ...form, lastName: value })
+                    }
                 />
                 <StyledTextInput
                     placeholder="Age"
@@ -60,7 +70,9 @@ const LoginScreen = observer(({ navigation }) => {
                     textContentType="password"
                     value={form.password}
                     secureTextEntry={true}
-                    onChangeText={(value) => setForm({ ...form, password: value })}
+                    onChangeText={(value) =>
+                        setForm({ ...form, password: value })
+                    }
                 />
                 <Button title="Войти" onPress={login} />
             </View>

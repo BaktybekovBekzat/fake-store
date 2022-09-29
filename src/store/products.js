@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 class Products {
     products = [];
@@ -10,17 +10,23 @@ class Products {
     }
 
     async getAll(page = 1) {
-        this.isLoading = true;
+        runInAction(() => {
+            this.isLoading = true;
+        });
         try {
             const res = await fetch(
                 `https://dummyjson.com/products?skip=${(page - 1) * 30}`
             );
             const json = await res.json();
-            this.products = json.products;
+            runInAction(() => {
+                this.products = json.products;
+            });
         } catch (e) {
             console.log(e);
         } finally {
-            this.isLoading = false;
+            runInAction(() => {
+                this.isLoading = false;
+            });
         }
     }
 }

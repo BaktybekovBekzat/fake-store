@@ -6,9 +6,8 @@ import { ProductItem } from "../../components";
 import { observer } from "mobx-react";
 
 const StyledProductsList = styled.View`
-    display: grid !important;
-    grid-template-columns: 160px 160px;
-    justify-content: center;
+    display: flex;
+    flex: 2;
     gap: 10px;
     padding: 10px 15px;
 `;

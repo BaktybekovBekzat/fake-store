@@ -21,7 +21,7 @@ const Pagination = ({ setCurrentPage, productsCount }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 columnGap: 10,
-                marginTop: 30,
+                marginBottom: 30,
             }}
         >
             <TouchableOpacity

@@ -33,7 +33,9 @@ const StyledImage = styled.Image`
 const CartItem = ({ product }) => {
     return (
         <StyledItem>
-            <StyledImage source={{ uri: product.thumbnail, width: 80, minHeight: 100 }} />
+            <StyledImage
+                source={{ uri: product.thumbnail, width: 80, minHeight: 100 }}
+            />
             <View>
                 <StyledTitle>{product.title}</StyledTitle>
                 <StyledPrice>$ {product.price}</StyledPrice>
