@@ -13,7 +13,8 @@ const StyledSearch = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-right: 5px;
+    justify-content: space-between;
+    padding-right: 10px;
 `;
 
 const Search = observer(() => {
@@ -34,7 +35,7 @@ const Search = observer(() => {
                 value={search}
                 onChangeText={(val) => setSearch(val)}
                 style={{
-                    width: "100%",
+                    width: "90%",
                     paddingVertical: 5,
                     paddingLeft: 15,
                 }}

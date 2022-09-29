@@ -50,8 +50,8 @@ const ProductItem = observer(({ data }) => {
     const [isInWishlist, setisInWishlist] = useState(false);
     const navigation = useNavigation();
 
-    useMemo(() => {
-        return setisInWishlist(
+    useEffect(() => {
+        setisInWishlist(
             wishlist.products.some((product) => product.id === data.id)
         );
     }, [wishlist.products]);
@@ -75,25 +75,25 @@ const ProductItem = observer(({ data }) => {
                     source={{ uri: data.thumbnail }}
                     resizeMode="contain"
                 />
-                <View
-                    style={{
-                        paddingBottom: 10,
-                        paddingLeft: 12,
-                        paddingRight: 12,
-                    }}
-                >
-                    <StyledTitle>{data.title}</StyledTitle>
-                    <StyledPrice>${data.price}</StyledPrice>
-                </View>
             </TouchableOpacity>
+            <View
+                style={{
+                    paddingBottom: 10,
+                    paddingLeft: 12,
+                    paddingRight: 12,
+                }}
+            >
+                <StyledTitle>{data.title}</StyledTitle>
+                <StyledPrice>${data.price}</StyledPrice>
+            </View>
             <TouchableOpacity
                 onPress={() => {
                     if (!isInWishlist) {
-                        wishlist.addProduct(data);
                         setisInWishlist(true);
+                        wishlist.addProduct(data);
                     } else {
-                        wishlist.removeProduct(data.id);
                         setisInWishlist(false);
+                        wishlist.removeProduct(data.id);
                     }
                 }}
             >
