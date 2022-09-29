@@ -16,7 +16,6 @@ const StyledPrice = styled.Text`
     font-size: 22px;
     color: #85bb65;
     font-weight: bold;
-    line-height: 19px;
     text-align: right;
     margin-top: 10px;
 `;

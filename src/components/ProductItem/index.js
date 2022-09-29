@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Dimensions, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import wishlist from "../../store/wishlist";
@@ -47,11 +47,11 @@ const StyledHeartIcon = styled.Image`
 `;
 
 const ProductItem = observer(({ data }) => {
-    const navigation = useNavigation();
     const [isInWishlist, setisInWishlist] = useState(false);
+    const navigation = useNavigation();
 
     useMemo(() => {
-        setisInWishlist(
+        return setisInWishlist(
             wishlist.products.some((product) => product.id === data.id)
         );
     }, [wishlist.products]);
@@ -85,18 +85,22 @@ const ProductItem = observer(({ data }) => {
                 <StyledPrice>${data.price}</StyledPrice>
             </View>
             <TouchableOpacity
-                onPress={() =>
-                    !isInWishlist
-                        ? wishlist.addProduct(data)
-                        : wishlist.removeProduct(data.id)
-                }
+                onPress={() => {
+                    if (!isInWishlist) {
+                        wishlist.addProduct(data);
+                        setisInWishlist(true);
+                    } else {
+                        wishlist.removeProduct(data.id);
+                        setisInWishlist(false);
+                    }
+                }}
             >
                 <StyledHeartIcon
-                    source={{
-                        uri: !isInWishlist
-                            ? "../../assets/images/heart.png"
-                            : "../../assets/images/heart-active.png",
-                    }}
+                    source={
+                        !isInWishlist
+                            ? require("../../assets/images/heart.png")
+                            : require("../../assets/images/heart-active.png")
+                    }
                 />
             </TouchableOpacity>
         </StyledProductItem>

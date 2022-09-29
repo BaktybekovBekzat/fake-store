@@ -47,7 +47,7 @@ const CartScreen = observer(() => {
                     </Text>
                 )}
             </View>
-            <StyledTotal style={{ borderTop: "1px solid #000" }}>
+            <StyledTotal>
                 <Text style={{ fontSize: 20, fontWeight: 700 }}>Total:</Text>
                 <Text
                     style={{ fontSize: 22, fontWeight: 700, color: "#85bb65" }}
