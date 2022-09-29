@@ -3,11 +3,13 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 
 const StyledItem = styled.View`
-    flex: 1;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #ccc;
+    border: 1px;
+    border-style: solid;
+    border-color: "#ccc";
     padding: 7px 15px;
     margin-bottom: 15px;
 `;
@@ -21,7 +23,6 @@ const StyledPrice = styled.Text`
     font-size: 22px;
     color: #85bb65;
     font-weight: bold;
-    line-height: 19px;
     text-align: right;
 `;
 

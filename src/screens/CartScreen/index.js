@@ -7,12 +7,9 @@ import styled from "styled-components/native";
 
 const StyledTotal = styled.View`
     padding-top: 10px;
-    flex: 1;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-top: 1px;
-    border-top-style: solid;
-    border-top-color: "#000";
 `;
 
 const CartScreen = observer(() => {
@@ -38,19 +35,25 @@ const CartScreen = observer(() => {
                 ) : (
                     <Text
                         style={{
-                            fontWeight: 700,
+                            fontWeight: "bold",
                             textAlign: "center",
                             fontSize: 20,
+                            marginBottom: 20,
                         }}
                     >
                         Корзина пуста
                     </Text>
                 )}
             </View>
+            <View style={{ height: 2, backgroundColor: "#ccc" }}></View>
             <StyledTotal>
-                <Text style={{ fontSize: 20, fontWeight: 700 }}>Total:</Text>
+                <Text style={{ fontSize: 20, fontWeight: "bold" }}>Total:</Text>
                 <Text
-                    style={{ fontSize: 22, fontWeight: 700, color: "#85bb65" }}
+                    style={{
+                        fontSize: 22,
+                        fontWeight: "bold",
+                        color: "#85bb65",
+                    }}
                 >
                     $ {sum(cart.data)}
                 </Text>
