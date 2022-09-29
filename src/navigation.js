@@ -63,7 +63,7 @@ const Navigation = () => {
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{ headerTitle: "Fake Store" }}
+                options={{ headerTitle: "Fake Store", tabBarLabel: "Главная" }}
             />
             <Tab.Screen
                 name="Product"
@@ -76,12 +76,12 @@ const Navigation = () => {
             <Tab.Screen
                 name="Cart"
                 component={CartScreen}
-                options={{ headerTitle: "Корзина" }}
+                options={{ headerTitle: "Корзина", tabBarLabel: "Корзина" }}
             />
             <Tab.Screen
                 name="Wishlist"
                 component={WishlistScreen}
-                options={{ headerTitle: "Избранное" }}
+                options={{ headerTitle: "Избранное", tabBarLabel: "Избранное" }}
             />
             <Tab.Screen
                 name="Login"

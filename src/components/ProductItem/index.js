@@ -14,19 +14,14 @@ const StyledProductItem = styled.View`
     height: 240px;
     border-radius: 8px;
     background-color: #fff;
-    shadow-color: #000;
-    shadow-offest: {
-        width: 0;
-        height: 0;
-    }
-    shadow-opacity: 0.1;
-    shadow-radius: 12;
+    elevation: 1;
+    margin: 5px;
 `;
 
 const StyledTitle = styled.Text`
     font-size: 12px;
     color: #000;
-    font-weight: 500;
+    font-weight: medium;
     line-height: 15px;
     height: 30px;
     overflow-y: hidden;
@@ -34,7 +29,7 @@ const StyledTitle = styled.Text`
 
 const StyledPrice = styled.Text`
     font-size: 20px;
-    font-weight: 700;
+    font-weight: bold;
     margin-top: 5px;
 `;
 
@@ -65,6 +60,12 @@ const ProductItem = observer(({ data }) => {
         <StyledProductItem
             style={{
                 maxWidth: width / 2,
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 0,
+                },
+                shadowRadius: 12,
             }}
         >
             <StyledImage

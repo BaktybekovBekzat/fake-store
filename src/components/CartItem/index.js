@@ -20,7 +20,7 @@ const StyledTitle = styled.Text`
 const StyledPrice = styled.Text`
     font-size: 22px;
     color: #85bb65;
-    font-weight: 700;
+    font-weight: bold;
     line-height: 19px;
     text-align: right;
 `;

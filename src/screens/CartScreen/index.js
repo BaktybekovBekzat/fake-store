@@ -7,9 +7,12 @@ import styled from "styled-components/native";
 
 const StyledTotal = styled.View`
     padding-top: 10px;
-    display: flex;
+    flex: 1;
     flex-direction: row;
     justify-content: space-between;
+    border-top: 1px;
+    border-top-style: solid;
+    border-top-color: "#000";
 `;
 
 const CartScreen = observer(() => {

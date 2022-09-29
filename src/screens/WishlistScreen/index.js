@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, ScrollView, Text } from "react-native";
+import { FlatList, SafeAreaView, ScrollView, Text } from "react-native";
 import wishlist from "../../store/wishlist";
 import styled from "styled-components/native";
 import { ProductItem } from "../../components";
@@ -18,16 +18,25 @@ const WishlistScreen = observer(({ navigation }) => {
             <ScrollView style={{ paddingBottom: 30 }}>
                 {wishlist.products.length > 0 ? (
                     <>
-                        <StyledProductsList>
-                            {wishlist.products.map((product) => {
-                                return (
-                                    <ProductItem
-                                        data={product}
-                                        key={product.id}
-                                    />
-                                );
-                            })}
-                        </StyledProductsList>
+                        <FlatList
+                            data={wishlist.products}
+                            renderItem={(item) => (
+                                <ProductItem
+                                    key={item.item.id}
+                                    data={item.item}
+                                />
+                            )}
+                            numColumns={2}
+                            contentContainerStyle={{
+                                paddingVertical: 30,
+                                paddingHorizontal: 15,
+                                gap: 15,
+                            }}
+                            columnWrapperStyle={{
+                                gap: 15,
+                                justifyContent: "center",
+                            }}
+                        ></FlatList>
                     </>
                 ) : (
                     <Text>Нет избранных товаров</Text>
