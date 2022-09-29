@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 class Cart {
     isLoading = false;
@@ -9,14 +9,20 @@ class Cart {
     }
 
     async getCart() {
-        this.isLoading = true;
+        runInAction(() => {
+            this.isLoading = true;
+        });
         try {
             const res = await fetch(`https://dummyjson.com/carts/user/${100}`);
 
-            this.data = this.data;
+            runInAction(() => {
+                this.data = this.data;
+            });
         } catch (error) {
         } finally {
-            this.isLoading = false;
+            runInAction(() => {
+                this.isLoading = false;
+            });
         }
     }
 
@@ -35,14 +41,18 @@ class Cart {
                 }),
             });
 
-            this.data = [...this.data, product];
+            runInAction(() => {
+                this.data = [...this.data, product];
+            });
         } catch (error) {
             console.log(error);
         }
     }
 
     async removeFromCart(id) {
-        this.data = [...this.data.filter((product) => product.id !== id)];
+        runInAction(() => {
+            this.data = [...this.data.filter((product) => product.id !== id)];
+        });
     }
 }
 

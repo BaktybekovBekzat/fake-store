@@ -19,7 +19,7 @@ const HomeScreen = observer(({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <FlatList
-                data={products.products}
+                data={products.products.slice()}
                 renderItem={(item) => (
                     <ProductItem key={item.item.id} data={item.item} />
                 )}

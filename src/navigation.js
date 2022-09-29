@@ -10,10 +10,13 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import cart from "./store/cart";
+import wishlist from "./store/wishlist";
+import { observer } from "mobx-react";
 
 const Tab = createBottomTabNavigator();
 
-const Navigation = () => {
+const Navigation = observer(() => {
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -76,12 +79,32 @@ const Navigation = () => {
             <Tab.Screen
                 name="Cart"
                 component={CartScreen}
-                options={{ headerTitle: "Корзина", tabBarLabel: "Корзина" }}
+                options={{
+                    headerTitle: "Корзина",
+                    tabBarLabel: "Корзина",
+                    tabBarBadge:
+                        cart.data.length > 0 ? cart.data.length : undefined,
+                    tabBarBadgeStyle: {
+                        backgroundColor: "#f58735",
+                        color: "#fff",
+                    },
+                }}
             />
             <Tab.Screen
                 name="Wishlist"
                 component={WishlistScreen}
-                options={{ headerTitle: "Избранное", tabBarLabel: "Избранное" }}
+                options={{
+                    headerTitle: "Избранное",
+                    tabBarLabel: "Избранное",
+                    tabBarBadge:
+                        wishlist.products.length > 0
+                            ? wishlist.products.length
+                            : undefined,
+                    tabBarBadgeStyle: {
+                        backgroundColor: "#f58735",
+                        color: "#fff",
+                    },
+                }}
             />
             <Tab.Screen
                 name="Login"
@@ -93,6 +116,6 @@ const Navigation = () => {
             />
         </Tab.Navigator>
     );
-};
+});
 
 export default Navigation;

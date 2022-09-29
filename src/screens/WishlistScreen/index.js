@@ -11,7 +11,7 @@ const WishlistScreen = observer(({ navigation }) => {
             {wishlist.products.length > 0 ? (
                 <>
                     <FlatList
-                        data={wishlist.products}
+                        data={wishlist.products.slice()}
                         renderItem={(item) => (
                             <ProductItem key={item.item.id} data={item.item} />
                         )}

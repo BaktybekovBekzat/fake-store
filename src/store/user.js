@@ -1,5 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 class User {
     isLoggedIn = false;
@@ -10,7 +9,9 @@ class User {
     }
 
     async login(data) {
-        this.isLoading = true;
+        runInAction(() => {
+            this.isLoading = true;
+        });
         try {
             const res = await fetch("https://dummyjson.com/users/add", {
                 method: "POST",
@@ -24,13 +25,19 @@ class User {
                     "Content-type": "application/json",
                 },
             });
-            this.isLoggedIn = true;
+            runInAction(() => {
+                this.isLoggedIn = true;
+            });
 
             return (await res.json()) ? true : false;
         } catch (e) {
-            this.isLoggedIn = false;
+            runInAction(() => {
+                this.isLoggedIn = false;
+            });
         } finally {
-            this.isLoading = false;
+            runInAction(() => {
+                this.isLoading = false;
+            });
         }
     }
 }

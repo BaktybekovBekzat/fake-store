@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 class Product {
     data = {
@@ -11,14 +11,18 @@ class Product {
     }
 
     async getOne(id) {
-        this.isLoading = true;
+        runInAction(() => {
+            this.isLoading = true;
+        });
         try {
             const res = await fetch(`https://dummyjson.com/products/${id}`);
             this.data = await res.json();
         } catch (e) {
             console.log(e);
         } finally {
-            this.isLoading = false;
+            runInAction(() => {
+                this.isLoading = false;
+            });
         }
     }
 }
